@@ -5,13 +5,12 @@ import { NavLink } from "react-router-dom";
 
 export const Nav = styled.nav`
   background: transparent;
-  margin-top: 80px;
+  margin-bottom: -80px;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: absolute;
   top: 0;
   width: 100%;
   z-index: 50;
@@ -22,7 +21,6 @@ export const NavbarContainer = styled(Container)`
   justify-content: start;
   height: 80px;
   position: relative;
-  /* border: 1px solid white; */
 `;
 
 export const NavLogo = styled(NavLink)`
@@ -42,10 +40,15 @@ export const MobileIcon = styled.div`
 
   @media screen and (max-width: 960px) {
     height: 100%;
-    display: block;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     /* text-align: center; */
     position: absolute;
-    top: 0;
+    top: auto;
+    bottom: auto;
     right: 30px;
 
     font-size: 2.2rem;
@@ -66,13 +69,15 @@ export const NavMenu = styled.ul`
   text-align: center;
   list-style: none;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  z-index: 50000000;
   /* border: 1px solid green; */
 
   @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100vh;
     position: fixed;
@@ -82,10 +87,11 @@ export const NavMenu = styled.ul`
     /* opacity: ${({ show }) => (show ? 1 : 0)}; */
     /* visibility: ${({ show }) => (show ? "visible" : "hidden")}; */
     transform: translateY(${({ show }) => (show ? "0" : "-100vh")});
-    transition: transform 5s ease;
+    transition: transform 0.8s ease;
     background-color: #071c2f;
-    z-index: -99999;
-    border: 20px solid blue;
+    /* z-index: -99900; */
+    z-index: 50000000;
+    /* border: 5px solid blue; */
   }
 `;
 
@@ -118,4 +124,9 @@ export const NavLinks = styled(NavLink)`
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #c8c9d8;
+  }
 `;

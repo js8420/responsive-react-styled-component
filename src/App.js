@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import Pricing from "./pages/Pricing";
+import PricingPage from "./pages/PricingPage";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 //
 
@@ -15,10 +16,12 @@ function App() {
       <GlobalStyle />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/" exact element={<Home />} />
+        <Route path="/signup" exact element={<Signup />} />
+        <Route path="/pricing" exact element={<PricingPage />} />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }

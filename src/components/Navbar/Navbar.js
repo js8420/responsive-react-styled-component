@@ -15,7 +15,9 @@ import {
   NavItem,
   NavLinks,
 } from "./NavbarStyle";
+
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const data = [
   {
@@ -36,10 +38,29 @@ export const data = [
 const Navbar = () => {
   const [show, setShow] = useState(false);
 
+  // const navigate = useNavigate();
+  const location = useLocation(); // This hook returns the current location object.
+
   console.log("Show value: ", show);
 
-  const menuToggle = () => {
+  const menuToggle = (to, id) => {
+    if (id && location.pathname === "/") {
+      scrollTo(id);
+    }
     setShow(!show);
+  };
+
+  const scrollTo = (id) => {
+    const element = document.getElementById(id);
+
+    // The Element interface's scrollIntoView() method scrolls the element's ancestor containers such that the element on which scrollIntoView() is called is visible to the user.
+    element.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const closeMenu = (to, id) => {
+    setShow(false);
   };
 
   return (
@@ -57,10 +78,15 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faBars} />
             )}
           </MobileIcon>
-          <NavMenu className="demo">
+          <NavMenu show={show}>
             {data.map((elementList, index) => (
               <NavItem key={index}>
-                <NavLinks to={elementList.to}>{elementList.text}</NavLinks>
+                <NavLinks
+                  to={elementList.to}
+                  onClick={() => closeMenu(elementList.to, elementList.id)}
+                >
+                  {elementList.text}
+                </NavLinks>
               </NavItem>
             ))}
           </NavMenu>
